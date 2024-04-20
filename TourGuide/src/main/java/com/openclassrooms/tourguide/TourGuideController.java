@@ -2,6 +2,7 @@ package com.openclassrooms.tourguide;
 
 import java.util.List;
 
+import com.openclassrooms.tourguide.dto.NearbyAttraction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,6 @@ public class TourGuideController {
     	return tourGuideService.getUserLocation(getUser(userName));
     }
     
-    //  TODO: Change this method to no longer return a List of Attractions.
  	//  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
  	//  Return a new JSON object that contains:
     	// Name of Tourist attraction, 
@@ -42,8 +42,9 @@ public class TourGuideController {
         // The reward points for visiting each Attraction.
         //    Note: Attraction reward points can be gathered from RewardsCentral
     @RequestMapping("/getNearbyAttractions") 
-    public List<Attraction> getNearbyAttractions(@RequestParam String userName) {
-    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
+    public List<NearbyAttraction> getNearbyAttractions(@RequestParam String userName) {
+        User user = getUser(userName);
+        VisitedLocation visitedLocation = tourGuideService.getUserLocation(user);
     	return tourGuideService.getNearByAttractions(visitedLocation);
     }
     
