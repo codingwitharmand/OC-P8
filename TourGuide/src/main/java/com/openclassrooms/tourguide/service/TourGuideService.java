@@ -86,7 +86,6 @@ public class TourGuideService {
 	}
 
 	public List<NearbyAttraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		var nearbyAttractions = new ArrayList<NearbyAttraction>();
 		List<Attraction> attractions = gpsUtil.getAttractions();
 		Map<Attraction, Double> distanceMap = new HashMap<>();
 		for (Attraction attraction : attractions) {
